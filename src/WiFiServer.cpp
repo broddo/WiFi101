@@ -84,6 +84,16 @@ uint8_t WiFiServer::begin(uint8_t opt)
 	return 1;
 }
 
+void WiFiServer::stop() {
+  if (_socket == -1) {
+    return;
+  }
+
+  socketBufferUnregister(_socket);
+  close(_socket);
+  _socket = -1;
+}
+
 WiFiClient WiFiServer::available(uint8_t* status)
 {
 	uint32_t flag;
